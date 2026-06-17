@@ -1,0 +1,56 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+
+# Allow the workflow to push the built site to the gh-pages branch.
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # CBEX talks to a fixed production API (ApiConstants.baseUrl =
+      # https://cbexlogistics.com), so no FLAVOR / Remote Config is needed.
+      # base-href MUST match the repo name for GitHub Pages project sites
+      # (served at https://hiethm9980-coder.github.io/cbex/). If you later point
+      # a custom domain at the root, change this to "/".
+      - name: Build web (release)
+        run: |
+          flutter build web \
+            --release \
+            --base-href "/cbex/" \
+            --pwa-strategy offline-first
+
+      # Required for GoRouter on GitHub Pages: serve index.html for unknown
+      # deep links so client-side routing works on refresh.
+      - name: Add 404.html for SPA routing
+        run: cp build/web/index.html build/web/404.html
+
+      # Guard against a stuck Service Worker: stamp a unique build marker so
+      # returning users' browsers refresh the cached assets immediately.
+      - name: Cache-bust service worker
+        run: |
+          if [ -f build/web/flutter_service_worker.js ]; then
+            sed -i "1i // build: $(date -u +%FT%TZ)-${{ github.sha }}" build/web/flutter_service_worker.js
+          fi
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web

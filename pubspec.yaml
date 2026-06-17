@@ -1,0 +1,154 @@
+name: cbex
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+
+dependencies:
+
+  flutter_localizations:
+    sdk: flutter
+
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.8
+
+  # ── Network (Data Layer — DO NOT CHANGE) ──
+  dio: ^5.9.1
+  flutter_secure_storage: ^10.0.0
+  get_it: ^9.2.1
+  equatable: ^2.0.8
+  uuid: ^4.5.3
+
+  # ── State Management ──
+  flutter_riverpod: ^3.2.1
+
+  # ── Routing ──
+  go_router: ^17.1.0
+
+  # ── Utilities ──
+  intl: ^0.20.2
+  jiffy: ^6.4.4
+
+  # firebase
+  firebase_core: ^4.4.0
+  firebase_messaging: ^16.1.1
+  firebase_remote_config: ^6.3.0
+
+  # awesome notifications
+  awesome_notifications: ^0.11.0
+
+  # share plus
+  share_plus: ^12.0.1
+  url_launcher: ^6.3.2
+
+  # sql
+  sqlite3: ^3.1.1
+  sqlite3_flutter_libs: ^0.5.41
+
+  pwa_install: ^0.0.6
+
+  # send notification fcm
+  http: ^1.6.0
+  googleapis_auth: ^2.0.0
+
+  # cached network image
+  cached_network_image: ^3.4.1
+
+  # fonts
+  # google_fonts: ^6.2.1  # replaced with local fonts
+
+  # widgets
+  flutter_slidable: ^4.0.3
+
+  # file picker (for leave attachments)
+  file_picker: ^11.0.2
+  path_provider: ^2.1.5
+  open_filex: ^4.7.0
+  table_calendar: 3.2.0
+
+  flutter_expandable_fab: ^2.5.2
+
+
+  path: any
+
+  # Login audit: JSON device snapshot. device_info_plus 13.x needs win32 ^6, which
+  # conflicts with flutter_secure_storage_windows / file_picker in this repo — use 11.x.
+  device_info_plus: ^11.3.0
+  package_info_plus: ^8.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^6.0.0
+
+#  flutter_native_splash:
+#flutter_native_splash:
+#  color: "#e2e7e9"
+#  color_dark: "#161618"
+#  image: "assets/images/logo_2.png"
+#  image_dark: "assets/images/logo.png"
+#  android_12:
+#    image: "assets/images/logo_2_android12.png"
+#    image_dark: "assets/images/logo_android12.png"
+#    color: "#e2e7e9"
+#    color_dark: "#161618"
+#    icon_background_color: "#e2e7e9"
+#    icon_background_color_dark: "#161618"
+#  # dart run flutter_native_splash:create
+
+#  flutter_launcher_icons:
+#flutter_icons:
+#   android: "ic_launcher"
+#   ios: true
+#   image_path: "assets/images/icon.png"
+#   adaptive_icon_background: "#e2e7e9"
+#   adaptive_icon_foreground: "assets/images/icon_foreground.png"
+#   web:
+#     generate: true
+#     image_path: "assets/images/icon.png"
+#     background_color: "#e2e7e9"
+#     theme_color: "#e2e7e9"
+#  # flutter pub run flutter_launcher_icons:main
+
+
+flutter:
+
+
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/i18n/
+    - assets/images/
+
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Cairo-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Cairo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Cairo-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cairo-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Cairo-Black.ttf
+          weight: 900
+
+

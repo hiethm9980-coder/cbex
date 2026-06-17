@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "63442796503",
+    "project_id": "cbex-2be3a",
+    "storage_bucket": "cbex-2be3a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63442796503:android:5a3ab6433cffa9cea75592",
+        "android_client_info": {
+          "package_name": "com.cbm.cbex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPXAJ3pNNhhtj6hQqkeFNwM9vAau_8ZTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
