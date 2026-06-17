@@ -66,6 +66,42 @@ class AuthNotifier extends Notifier<AuthState> {
     state = AuthState(status: AuthStatus.authenticated, user: data.user);
   }
 
+  /// Registers a new account + owner and auto-logs-in (the API returns a token).
+  /// Throws [ApiException] on failure — handled by the register screen.
+  Future<void> register({
+    required String accountName,
+    required String accountType,
+    required String name,
+    required String email,
+    required String password,
+    required String passwordConfirmation,
+    String? phone,
+    String country = 'SA',
+    String locale = 'ar',
+  }) async {
+    final repo = ref.read(authRepositoryProvider);
+    final data = await repo.register({
+      'account_name': accountName,
+      'account_type': accountType,
+      'name': name,
+      'email': email,
+      'password': password,
+      'password_confirmation': passwordConfirmation,
+      if (phone != null && phone.trim().isNotEmpty) 'phone': phone.trim(),
+      'country': country,
+      'locale': locale,
+    });
+    // The repository stored the token; enrich with the full /me profile
+    // (permissions, account) — fall back to the registration payload's user.
+    var user = data.user;
+    try {
+      user = await repo.me();
+    } catch (_) {
+      // keep `data.user`
+    }
+    state = AuthState(status: AuthStatus.authenticated, user: user);
+  }
+
   Future<void> logout() async {
     await ref.read(authRepositoryProvider).logout();
     state = const AuthState(status: AuthStatus.unauthenticated);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/errors/exceptions.dart';
@@ -304,11 +305,35 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             const SizedBox(height: 18),
 
             _primaryButton(),
+            const SizedBox(height: 14),
+            _registerLink(),
           ],
         ),
       ),
     );
   }
+
+  Widget _registerLink() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'ليس لديك حساب؟',
+            style: TextStyle(
+                fontSize: 13, color: _ink2, fontWeight: FontWeight.w500),
+          ),
+          TextButton(
+            onPressed: _loading ? null : () => context.push('/register'),
+            style: TextButton.styleFrom(
+              foregroundColor: AppColors.secondary,
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            child: const Text('إنشاء حساب',
+                style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w800)),
+          ),
+        ],
+      );
 
   Widget _label(String text) => Align(
         alignment: AlignmentDirectional.centerStart,

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../features/auth/presentation/providers/auth_providers.dart';
 import '../features/auth/presentation/screens/login_screen.dart';
+import '../features/auth/presentation/screens/register_screen.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
 import '../features/home/presentation/screens/home_screen.dart';
 
@@ -22,16 +23,22 @@ final routerProvider = Provider<GoRouter>((ref) {
         return loc == '/splash' ? null : '/splash';
       }
       if (auth.isUnauthenticated) {
-        return loc == '/login' ? null : '/login';
+        // Login and register are reachable while signed out.
+        return (loc == '/login' || loc == '/register') ? null : '/login';
       }
-      // authenticated → leave splash/login for home.
-      if (loc == '/splash' || loc == '/login') return '/home';
+      // authenticated → leave the auth screens for home.
+      if (loc == '/splash' || loc == '/login' || loc == '/register') {
+        return '/home';
+      }
       return null;
     },
     routes: [
       GoRoute(
           path: '/splash', builder: (context, state) => const SplashScreen()),
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
+      GoRoute(
+          path: '/register',
+          builder: (context, state) => const RegisterScreen()),
       GoRoute(path: '/home', builder: (context, state) => const HomeScreen()),
     ],
   );
