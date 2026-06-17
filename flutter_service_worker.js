@@ -1,4 +1,4 @@
-// build: 2026-06-17T20:47:59Z-29fd162961dbe6ad39d4f28f8b8469fbc057164e
+// build: 2026-06-17T21:06:54Z-442924372078541adfd8d14597440d778076de3b
 'use strict';
 
 self.addEventListener('install', () => {
